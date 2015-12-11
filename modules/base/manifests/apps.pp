@@ -6,6 +6,7 @@ class base::apps {
     'gcc',
     'git',
     'ipython',
+    'openssh',
     'openssl',
     'python2',
     'rxvt-unicode',
