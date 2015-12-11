@@ -1,0 +1,14 @@
+[user]
+   name = Sam Hansen
+   email = solid.se7en@gmail.com
+[core]
+   editor = vim
+
+[color]
+   ui = auto
+
+[sendemail]
+   smtpencryption = tls
+   smtpserver = smtp.gmail.com
+   smtpuser = solid.se7en@gmail.com
+   smtpserverport = 587

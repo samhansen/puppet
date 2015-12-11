@@ -1,0 +1,21 @@
+syntax on
+set background=dark
+set backspace=2
+set cursorline
+set expandtab
+set incsearch
+set laststatus=2
+set nohlsearch
+set nostartofline
+set novisualbell
+set nowrap
+set number
+set shiftwidth=2
+set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+set tabstop=2
+
+" vger
+imap <F2> Signed-off-by: Sam Hansen <solid.se7en@gmail.com>
+
+highlight ExtraWhitespace ctermbg=red
+match ExtraWhitespace /\s\+$/

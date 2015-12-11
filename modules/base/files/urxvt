@@ -1,0 +1,4 @@
+Rxvt.background: black
+Rxvt.foreground: white
+Rxvt.font: xft:DejaVuSansMono:pixelsize=26:antialias=true:hinting=true
+Rxvt.boldFont: xft:DejaVuSansMono:pixelsize=26:antialias=true:hinting=true
