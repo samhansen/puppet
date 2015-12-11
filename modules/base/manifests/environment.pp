@@ -1,15 +1,19 @@
 # My preferred environment.  All resources contined here are non-essential
 # environment preferences.
 class base::environment {
+  File {
+    owner => $::user,
+    group => $::user,
+    ensure => present,
+  }
+
   # Gitconfig
   file { "/home/$::user/.gitconfig":
-    ensure => present,
     source => 'puppet:///modules/base/gitconfig',
   }
 
   # Dircolors.
   file { "/home/$::user/.dircolors":
-    ensure => present,
     source => 'puppet:///modules/base/dircolors',
   }
 
@@ -19,32 +23,37 @@ class base::environment {
   }
 
   file { "/home/$::user/.i3/config":
-    ensure => present,
     source => 'puppet:///modules/base/i3config',
     require => File["/home/$::user/.i3"],
   }
 
+  # SSH config.
+  file { "/home/$::user/.ssh":
+    ensure => directory,
+    mode => '0700',
+  }
+
+  file { "/home/$::user/.ssh/config":
+    source => 'puppet:///modules/base/ssh_config',
+  }
+
   # Vimrc.
   file { "/home/$::user/.vimrc":
-    ensure => present,
     source => 'puppet:///modules/base/vimrc'
   }
 
   # Xbindkeys
   file { "/home/$::user/.xbindkeysrc":
-    ensure => present,
     source => 'puppet:///modules/base/xbindkeysrc',
   }
 
   # Xinitrc
   file { "/home/$::user/.xinitrc":
-    ensure => present,
     source => 'puppet:///modules/base/xinitrc',
   }
 
   # Xresources.
   file { "/home/$::user/.Xresources":
-    ensure => present,
     source => 'puppet:///modules/base/Xresources',
   }
 
@@ -53,7 +62,6 @@ class base::environment {
   }
 
   file { "/home/$::user/.Xresources.d/urxvt":
-    ensure => present,
     source => 'puppet:///modules/base/urxvt',
     require => File["/home/$::user/.Xresources.d"],
   }
