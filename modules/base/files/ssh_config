@@ -2,3 +2,8 @@ Host github.com
 User git
 IdentityFile %d/.ssh/github_rsa
 IdentitiesOnly yes
+
+Host gitlab.com
+User git
+IdentityFile %d/.ssh/gitlab_rsa
+IdentitiesOnly yes
