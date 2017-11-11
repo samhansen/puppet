@@ -5,6 +5,7 @@ class base::environment {
     ensure => present,
     group => $::group,
     owner => $::user,
+    mode => 0640,
   }
 
   # Common config directories.
