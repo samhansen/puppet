@@ -6,6 +6,7 @@ class base::apps {
     'gcc',
     'git',
     'ipython',
+    'lzma',
     'openssh-client',
     'python2.7',
     'rxvt-unicode',
@@ -16,6 +17,7 @@ class base::apps {
     'vim-puppet',
     'vlc',
     'weechat',
+    'xzip',
   ]
 
   package { $packages:
