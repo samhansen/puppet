@@ -1,4 +1,9 @@
+" disable system-wide filetype plugins.
+let b:did_ftplugin=1
+
+filetype plugin on
 syntax on
+
 set background=dark
 set backspace=2
 set cursorline
@@ -16,6 +21,10 @@ set tabstop=2
 
 " vger
 imap <F2> Signed-off-by: Sam Hansen <solid.se7en@gmail.com>
+
+nmap <F3> :setlocal spell! spelllang=en_us<CR>
+imap <F3> <Esc>:setlocal spell! spelllang=en_us<CR>i
+
 
 highlight ExtraWhitespace ctermbg=red
 match ExtraWhitespace /\s\+$/

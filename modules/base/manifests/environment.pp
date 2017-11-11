@@ -1,68 +1,73 @@
-# My preferred environment.  All resources contined here are non-essential
-# environment preferences.
+# Base environment common to all deployments.
 class base::environment {
   File {
-    owner => $::user,
-    group => $::user,
+    require => User["$::user"],
     ensure => present,
+    group => $::group,
+    owner => $::user,
   }
 
-  # Gitconfig
-  file { "/home/$::user/.gitconfig":
-    source => 'puppet:///modules/base/gitconfig',
-  }
-
-  # Dircolors.
-  file { "/home/$::user/.dircolors":
-    source => 'puppet:///modules/base/dircolors',
-  }
-
-  # I3 config.
-  file { "/home/$::user/.i3":
+  # Common config directories.
+  file { "$::home/.Xresources.d":
     ensure => directory,
   }
 
-  file { "/home/$::user/.i3/config":
-    source => 'puppet:///modules/base/i3config',
-    require => File["/home/$::user/.i3"],
+  # Dircolors.
+  file { "$::home/.dircolors":
+    source => 'puppet:///modules/base/dircolors',
+  }
+
+  # Gitconfig.
+  file { "$::home/.gitconfig":
+    source => 'puppet:///modules/base/gitconfig',
   }
 
   # SSH config.
-  file { "/home/$::user/.ssh":
+  file { "$::home/.ssh":
+    require => Package['openssh-client'],
     ensure => directory,
     mode => '0700',
   }
 
-  file { "/home/$::user/.ssh/config":
-    source => 'puppet:///modules/base/ssh_config',
-  }
-
-  # Vimrc.
-  file { "/home/$::user/.vimrc":
-    source => 'puppet:///modules/base/vimrc'
-  }
-
-  # Xbindkeys
-  file { "/home/$::user/.xbindkeysrc":
-    source => 'puppet:///modules/base/xbindkeysrc',
-  }
-
-  # Xinitrc
-  file { "/home/$::user/.xinitrc":
-    source => 'puppet:///modules/base/xinitrc',
+  file { "$::home/.ssh/config":
+    require => File["$::home/.ssh"],
+    source => 'puppet:///modules/base/sshconfig',
   }
 
   # Xresources.
-  file { "/home/$::user/.Xresources":
+  file { "$::home/.Xresources":
     source => 'puppet:///modules/base/Xresources',
+    notify => Exec['xrdb_reload'],
   }
 
-  file { "/home/$::user/.Xresources.d":
+  file { "$::home/.Xresources.d/urxvt":
+    require => Package['rxvt-unicode'],
+    source => 'puppet:///modules/base/urxvt',
+    notify => Exec['xrdb_reload'],
+  }
+
+  exec { "/usr/bin/xrdb -merge $::home/.Xresources":
+    alias => 'xrdb_reload',
+    refreshonly => true,
+  }
+
+  # Vim.
+  file { "$::home/.vimrc":
+    require => Package['vim'],
+    source => 'puppet:///modules/base/vimrc',
+  }
+
+  file { "$::home/.vim":
+    require => Package['vim'],
     ensure => directory,
   }
 
-  file { "/home/$::user/.Xresources.d/urxvt":
-    source => 'puppet:///modules/base/urxvt',
-    require => File["/home/$::user/.Xresources.d"],
+  file { "$::home/.vim/ftplugin":
+    ensure => directory,
+  }
+
+  file { "$::home/.vim/ftplugin/go.vim":
+    require => Package['vim'],
+    source => 'puppet:///modules/base/go.vim',
   }
 }

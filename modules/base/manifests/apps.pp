@@ -1,22 +1,36 @@
+# Base apps common to all deployments.
 class base::apps {
   $packages = [
     'bc',
-    'chromium',
     'gdb',
     'gcc',
     'git',
     'ipython',
-    'mutt',
-    'openssh',
-    'openssl',
-    'python2',
+    'openssh-client',
+    'python2.7',
     'rxvt-unicode',
     'strace',
+    'tmux',
     'tree',
     'vim',
+    'vim-puppet',
+    'vlc',
     'weechat',
-    'xbindkeys',
-    'xscreensaver',
+  ]
+
+  package { $packages:
+    ensure => installed,
+  }
+
+  case $operatingsystem {
+    'Ubuntu': { include base::apps::ubuntu }
+  }
+}
+
+# Ubuntu-specific app config.
+class base::apps::ubuntu {
+  $packages = [
+    'aptitude',
   ]
 
   package { $packages:
