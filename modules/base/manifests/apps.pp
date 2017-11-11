@@ -5,6 +5,7 @@ class base::apps {
     'gdb',
     'gcc',
     'git',
+    'golang-go',
     'ipython',
     'lzma',
     'openssh-client',
