@@ -5,7 +5,7 @@ class base::apps {
     'gdb',
     'gcc',
     'git',
-    'golang-go',
+    #'golang-go', # Install manually.
     'ipython',
     'lzma',
     'openssh-client',
