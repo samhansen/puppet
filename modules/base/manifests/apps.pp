@@ -8,7 +8,12 @@ class base::apps {
     #'golang-go', # Install manually.
     'ipython',
     'lzma',
+    'network-manager-openvpn',
+    'network-manager-openvpn-gnome',
+    'network-manager-pptp',
+    'network-manager-vpnc',
     'openssh-client',
+    'openvpn',
     'python2.7',
     'rxvt-unicode',
     'strace',
